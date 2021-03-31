@@ -4,3 +4,4 @@ sqls
 node_modules
 yarn.lock
 nohup.out
+temp

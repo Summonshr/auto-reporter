@@ -17,18 +17,27 @@ function caller(dir){
             await con.close();
           }
         }
-  
+      
         var xls = json2xls(result.rows);
         let dir = e.split('.')[0].split('-')
         let filename = dir.pop()
 
-        dir = ('./data/'+dir.join('/')).trim()
+        dir = ('./temp/'+dir.join('/')).trim()
 
         if (!fs.existsSync(dir)){
           fs.mkdirSync(dir);
         }
+
+        filename = dir.trim() + '/' + filename.trim() + ".csv"
   
-        fs.writeFileSync(dir.trim() + '/' + filename.trim() + ".csv", xls, 'binary');
+        fs.writeFileSync(filename, xls, 'binary');
+
+        try {
+          fs.copyFileSync(filename, filename.replace('./temp/','./data/'))
+        } catch (error) {
+          console.log(error)
+        }
+        
     });
   })
 }
