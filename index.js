@@ -3,16 +3,21 @@ var fs = require("fs");
 var json2xls = require("json2xls");
 var mail = require("./mail");
 function caller(dir) {
+  
   if (!fs.existsSync("./sqls/" + dir)) {
     return;
   }
+
   fs.readdirSync("./sqls/" + dir).map(async (e) => {
+    
     let moduleFile = "./sqls/" + dir + "/" + e;
 
     let data = require(moduleFile);
 
     let result = false;
+    
     let con = false;
+    
     try {
       con = await require("./connection")();
       result = await con.execute(data.sql);
@@ -23,18 +28,18 @@ function caller(dir) {
         await con.close();
       }
     }
+
     var xls = json2xls(result.rows);
-    let newdir = e.split(".")[0].split("-");
-    let filename = newdir.pop();
+    
 
     try {
-      dir = ("./data/" + dir + "/" + newdir.join("/")).trim();
+      dir = ("./data/" + dir + "/").trim();
 
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
       }
 
-      filename = filename.trim() + ".csv";
+      filename = data.title + ".xlsx";
 
       let pathSpace = dir.trim() + "/" + filename;
 
@@ -60,7 +65,8 @@ function caller(dir) {
   });
 }
 
-cron.schedule("*/1 * * * *", async () => caller("minutely"));
+// cron.schedule("*/1 * * * *", async () => caller("minutely"));
+// cron.schedule("*/5 * * * *", async () => caller("hourly"));
 caller("minutely");
 // caller("hourly");
 // cron.schedule('0 * * * *', async() => caller('hourly'))
