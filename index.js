@@ -65,9 +65,8 @@ function caller(dir) {
   });
 }
 
+// Enable any of this as per necessity
 // cron.schedule("*/1 * * * *", async () => caller("minutely"));
 // cron.schedule("*/5 * * * *", async () => caller("hourly"));
-caller("minutely");
-// caller("hourly");
 // cron.schedule('0 * * * *', async() => caller('hourly'))
 // cron.schedule('*/15 * * * *', async () => caller('every fifteen minute'))
