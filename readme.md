@@ -6,3 +6,4 @@ Features
 - [x] Send mail using your company email address
 - [x] One click start
 - [x] Add nodejs in your system and everything is ready to go
+- [x] Support for Oracle (Upcoming for Mysql and postgreqsl) 
