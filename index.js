@@ -64,7 +64,6 @@ function caller(dir) {
     }
   });
 }
-
 // Enable any of this as per necessity
 // cron.schedule("*/1 * * * *", async () => caller("minutely"));
 // cron.schedule("*/5 * * * *", async () => caller("hourly"));
