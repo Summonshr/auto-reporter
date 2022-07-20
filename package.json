@@ -8,6 +8,6 @@
     "oracledb": "^5.1.0"
   },
   "scripts": {
-    "start": "nohup node index.js &"
+    "start": "node index.js"
   }
 }
